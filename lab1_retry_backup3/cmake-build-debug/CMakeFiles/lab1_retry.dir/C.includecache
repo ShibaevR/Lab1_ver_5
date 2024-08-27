@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/1/CLionProjects/lab1_retry_backup3/fieldinfo.h
+
+C:/Users/1/CLionProjects/lab1_retry_backup3/float-element.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+float-element.h
+C:/Users/1/CLionProjects/lab1_retry_backup3/float-element.h
+
+C:/Users/1/CLionProjects/lab1_retry_backup3/float-element.h
+fieldinfo.h
+C:/Users/1/CLionProjects/lab1_retry_backup3/fieldinfo.h
+

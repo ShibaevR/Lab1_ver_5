@@ -495,40 +495,40 @@ void AllTests(){
 
 
     TestMatrixCreation();                       //Проверка добавления 1 матрицы в коллекцию
-    printf("\nCompleted 1 test\n");
+    //printf("\nCompleted 1 test\n");
 
     TestExistingMatrixFind();                   //Проверка нахождения существующей матрицы в коллекции
-    printf("\nCompleted 2 tests\n");
+    //printf("\nCompleted 2 tests\n");
 
     TestNotExistingMatrixFind();                //Проверка нахождения несуществующей матрицы в коллекции
-    printf("\nCompleted 3 tests\n");
+    //printf("\nCompleted 3 tests\n");
 
     TestRenamedMatrixFind();                    //Проверка переименовывания матрицы
-    printf("\nCompleted 4 tests\n");
+    //printf("\nCompleted 4 tests\n");
 
     TestReplacedNameMatrixFind();               //Проверка нахождения уже заменённого имени
-    printf("\nCompleted 5 tests\n");
+    //printf("\nCompleted 5 tests\n");
 
     TestMatrixAdd();                            //Проверка сложения матриц
-    printf("\nCompleted 6 tests\n");
+    //printf("\nCompleted 6 tests\n");
 
     TestMatrixSumFind();                        //Проверка добавления суммы матриц в коллекцию
-    printf("\nCompleted 7 tests\n");
+    //printf("\nCompleted 7 tests\n");
 
     TestMatrixMultiply();                       //Проверка умножения матриц
-    printf("\nCompleted 8 tests\n");
+    //printf("\nCompleted 8 tests\n");
 
     TestMatrixProductFind();                    //Проверка добавления произведения матриц в коллекцию
-    printf("\nCompleted 9 tests\n");
+    //printf("\nCompleted 9 tests\n");
 
     TestMatrixMultiplyByScalar();               //Проверка умножения матрицы на число
-    printf("\nCompleted 10 tests\n");
+    //printf("\nCompleted 10 tests\n");
 
     TestMatrixMultiplyByScalarFind();           //Проверка добавления новой мтарицы в коллекцию
-    printf("\nCompleted 11 tests\n");
+    //printf("\nCompleted 11 tests\n");
 
     TestMatrixAddLinearCombination();           //Проверка добавления к строке матрицы линейной комбинации других строк
-    printf("\nCompleted 12 tests\n");
+    //printf("\nCompleted 12 tests\n");
 
     TestMatrixMatrixAddLinearCombinationFind(); //Проверка добавления новой матрицы в коллекцию
 

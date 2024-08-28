@@ -30,10 +30,6 @@ void FloatRandom(void *element, void *max_float_number){
     *(float*)element = random_float;
 }
 
-void FloatGetElement(void *matrix_element, void *element){
-    memcpy((float*)matrix_element, (float*)element, sizeof(float*));
-}
-
 
 static FieldInfo *float_field_info = NULL;
 
@@ -48,7 +44,6 @@ FieldInfo *GetFloatFieldInfo(){
         float_field_info->m_print = FloatPrint;
         float_field_info->m_scan = FloatScan;
         float_field_info->m_random = FloatRandom;
-        float_field_info->m_get = FloatGetElement;
     }
     return float_field_info;
 }

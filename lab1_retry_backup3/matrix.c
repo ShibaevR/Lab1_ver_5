@@ -12,7 +12,7 @@ void MatrixPrint(Matrix **matrix){
     for (int i=0; i < (*matrix)->size; i++){
         printf("   ");
         for (int j=0; j < (*matrix)->size; j++) {
-            (*matrix)->type_info->m_print((*matrix)->data + (i * (*matrix)->size * (*matrix)->type_info->element_size) + j * (*matrix)->type_info->element_size);
+            (*matrix)->type_info->m_print((char*)(*matrix)->data + (i * (*matrix)->size * (*matrix)->type_info->element_size) + j * (*matrix)->type_info->element_size);
         }
         printf("\n");
     }
@@ -54,7 +54,7 @@ void MatrixCreate(MatrixCollection *collection, Matrix **matrix, char *name, siz
         for (int i=0; i < size; i++){
             for (int j=0; j < size; j++){
                 printf("\nEnter element in row %d column %d:", i+1, j+1);
-                element_type->m_scan((*matrix)->data + (i * size * element_type->element_size) + j * element_type->element_size);
+                element_type->m_scan((char*)(*matrix)->data + (i * size * element_type->element_size) + j * element_type->element_size);
             }
         }
     }
@@ -89,7 +89,7 @@ void MatrixAutoCreate(MatrixCollection *collection, Matrix **matrix, char *name,
     if(*matrix && (*matrix)->data){
         for (int i=0; i < size; i++){
             for (int j=0; j < size; j++){
-                element_type->m_random( (*matrix)->data + (i * size * element_type->element_size) + j * element_type->element_size, max_number);
+                element_type->m_random( (char*)(*matrix)->data + (i * size * element_type->element_size) + j * element_type->element_size, max_number);
             }
         }
     }
@@ -137,9 +137,9 @@ void MatrixAdd(Matrix **m_sum, Matrix **m_1, Matrix **m_2, MatrixCollection *col
 
         for (int i=0; i < (*m_1)->size; i++){
             for (int j=0; j < (*m_1)->size; j++){
-                (*m_sum)->type_info->m_addition((*m_sum)->data + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size,
-                                                (*m_1)->data + + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size,
-                                                (*m_2)->data + + (i * (*m_2)->size * (*m_2)->type_info->element_size) + j * (*m_2)->type_info->element_size);
+                (*m_sum)->type_info->m_addition((char*)(*m_sum)->data + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size,
+                                                (char*)(*m_1)->data + + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size,
+                                                (char*)(*m_2)->data + + (i * (*m_2)->size * (*m_2)->type_info->element_size) + j * (*m_2)->type_info->element_size);
             }
         }
     }
@@ -173,9 +173,9 @@ void MatrixMultiply(Matrix **m_product, Matrix **m_1, Matrix **m_2, MatrixCollec
 
         for (int i=0; i < (**m_1).size; i++){
             for (int j=0; j < (**m_1).size; j++){
-                (*m_product)->type_info->m_multiplication((*m_product)->data + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size,
-                                                          (*m_1)->data + + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size,
-                                                          (*m_2)->data + + (i * (*m_2)->size * (*m_2)->type_info->element_size) + j * (*m_2)->type_info->element_size);
+                (*m_product)->type_info->m_multiplication((char*)(*m_product)->data + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size,
+                                                          (char*)(*m_1)->data + + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size,
+                                                          (char*)(*m_2)->data + + (i * (*m_2)->size * (*m_2)->type_info->element_size) + j * (*m_2)->type_info->element_size);
             }
         }
     }
@@ -209,8 +209,8 @@ void MatrixMultiplyByScalar(Matrix **m_product, Matrix **m_1, MatrixCollection *
 
         for (int i=0; i < (*m_1)->size; i++){
             for (int j=0; j < (*m_1)->size; j++){
-                (*m_product)->type_info->m_multiplication((*m_product)->data + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size,
-                                                          (*m_1)->data + + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size, multiplier);
+                (*m_product)->type_info->m_multiplication((char*)(*m_product)->data + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size,
+                                                          (char*)(*m_1)->data + + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size, multiplier);
             }
         }
     }
@@ -244,7 +244,7 @@ void LinearCombinationInitialize(Matrix **linear_combination, Matrix **matrix){
 
         for (int i=0; i < (*linear_combination)->size; i++){
             for (int j=0; j < (*linear_combination)->size; j++){
-                memset((*linear_combination)->data + (i * (*linear_combination)->size * (*linear_combination)->type_info->element_size) + j * (*linear_combination)->type_info->element_size,
+                memset((char*)(*linear_combination)->data + (i * (*linear_combination)->size * (*linear_combination)->type_info->element_size) + j * (*linear_combination)->type_info->element_size,
                        0, (*linear_combination)->type_info->element_size);
             }
         }
@@ -284,13 +284,13 @@ void MatrixAddLinearCombination(Matrix **m_result, int row_number, Matrix **m_1,
                         exit(-1);
                     }
 
-                    (*linear_combination)->type_info->m_multiplication(temporary_result, (*m_1)->data + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size, multiplier);
+                    (*linear_combination)->type_info->m_multiplication(temporary_result, (char*)(*m_1)->data + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size, multiplier);
 
-                    (*linear_combination)->type_info->m_addition( (*linear_combination)->data + j * (*linear_combination)->type_info->element_size,
-                                                                  (*linear_combination)->data + j * (*linear_combination)->type_info->element_size, temporary_result);
+                    (*linear_combination)->type_info->m_addition( (char*)(*linear_combination)->data + j * (*linear_combination)->type_info->element_size,
+                                                                  (char*)(*linear_combination)->data + j * (*linear_combination)->type_info->element_size, temporary_result);
 
-                    memcpy( (*m_result)->data + (i * (*m_result)->size * (*m_result)->type_info->element_size) + j * (*m_result)->type_info->element_size,
-                            (*m_1)->data + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size,
+                    memcpy( (char*)(*m_result)->data + (i * (*m_result)->size * (*m_result)->type_info->element_size) + j * (*m_result)->type_info->element_size,
+                            (char*)(*m_1)->data + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size,
                             (*m_result)->type_info->element_size);
 
                     free(temporary_result);
@@ -308,9 +308,9 @@ void MatrixAddLinearCombination(Matrix **m_result, int row_number, Matrix **m_1,
     for (int i=0; i < (*m_1)->size; i++){
         for (int j=0; j < (*m_1)->size; j++){
             if(i+1 == row_number){
-                (*m_result)->type_info->m_addition((*m_result)->data + (i * (*m_result)->size * (*m_result)->type_info->element_size) + j * (*m_result)->type_info->element_size,
-                                                   (*m_1)->data + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size,
-                                                   (*linear_combination)->data + j * (*linear_combination)->type_info->element_size);
+                (*m_result)->type_info->m_addition((char*)(*m_result)->data + (i * (*m_result)->size * (*m_result)->type_info->element_size) + j * (*m_result)->type_info->element_size,
+                                                   (char*)(*m_1)->data + (i * (*m_1)->size * (*m_1)->type_info->element_size) + j * (*m_1)->type_info->element_size,
+                                                   (char*)(*linear_combination)->data + j * (*linear_combination)->type_info->element_size);
 
             }
         }

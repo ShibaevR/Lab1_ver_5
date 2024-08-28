@@ -30,11 +30,6 @@ void IntRandom(void *element, void *max_int_number) {
     *(int*)element = random_int;
 }
 
-void IntGetElement(void *matrix_element, void *element){
-    memcpy((int*)matrix_element, (int*)element, sizeof(int*));
-}
-
-
 static FieldInfo *int_field_info = NULL;
 
 FieldInfo *GetIntFieldInfo(){
@@ -48,7 +43,6 @@ FieldInfo *GetIntFieldInfo(){
         int_field_info->m_print = IntPrint;
         int_field_info->m_scan = IntScan;
         int_field_info->m_random = IntRandom;
-        int_field_info->m_get = IntGetElement;
     }
     return int_field_info;
 }

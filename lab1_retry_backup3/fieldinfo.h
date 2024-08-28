@@ -3,7 +3,7 @@
 
 typedef void (*ElementAddition)(void *sum, void *a, void *b), (*ElementMultiplication)(void *product, void *a, void *b);
 typedef void (*ElementPrint)(void *element), (*ElementScan)(void *element);
-typedef void(*ElementRandom)(void *element, void *max_number), (*ElementGet)(void *matrix_element, void *element);
+typedef void(*ElementRandom)(void *element, void *max_number);
 
 
 typedef struct{
@@ -15,7 +15,6 @@ typedef struct{
     ElementPrint m_print;                        //Вывод элементов матрицы
     ElementScan m_scan;                          //Ввод элементов матрицы
     ElementRandom m_random;                      //Присваивание случайного значения элементу матрицы
-    ElementGet m_get;
 }FieldInfo;
 
 
